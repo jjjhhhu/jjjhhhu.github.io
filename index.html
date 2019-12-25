@@ -19,22 +19,7 @@
   <script src="/js/pace.min.js"></script>
 
   <!-- Valine -->
-  <!-- <script src='//unpkg.com/valine/dist/Valine.min.js'></script> -->
-
-  <script>
-    // Register AV objects to the global
-    window.AV = require('leancloud-storage');
-
-    // Use import
-    import Valine from 'valine';
-    // or Use require
-    const Valine = require('valine');
-
-    new Valine({
-      el: '#vcomments',
-      // other config
-    })
-  </script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
 
 
   <meta name="generator" content="Hexo 4.2.0">
@@ -45,7 +30,7 @@
 <body>
 
   <!-- vcomments -->
-  <!-- <div id="vcomments"></div>
+  <div id="vcomments"></div>
   <script>
     new Valine({
       el: '#vcomments',
@@ -54,9 +39,9 @@
       notify: false,
       verify: false,
       avatar: 'mp',
-      placeholder: 'just go go'
+      placeholder: '快来填写一下你的评论吧~'
     })
-  </script> -->
+  </script>
 
   <div id="app">
     <main class="content">
