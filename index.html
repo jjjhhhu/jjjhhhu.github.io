@@ -105,16 +105,6 @@
 <blockquote>
 <p>java8特性：System.out::println 可以在迭代器中循环打印对象</p>
 </blockquote>
-<h2 id="二、mp查询方法"><a href="#二、mp查询方法" class="headerlink" title="二、mp查询方法"></a>二、mp查询方法</h2><h4 id="1-bean对象的操作"><a href="#1-bean对象的操作" class="headerlink" title="1.bean对象的操作"></a>1.bean对象的操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.在创建好的bean 可以使用@tableName(&quot;表名&quot;)注解声明对应的表</span><br><span class="line">2.使用@TableId注解可以声明该字段为主键</span><br><span class="line">3.若想使用自定义变量名可以使用@TableField(&quot;数据表中对应字段&quot;)来代替该字段</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li>1.若声明为static的静态变量则@Data不会为其生成getter和setter方法，并且该字段set方法赋的值不会被保存到数据库中 </li>
-<li>2.@TableField(exist=false)为备注（默认exist=true）</li>
-</ul>
-</blockquote>
-<h4 id="2-普通查询"><a href="#2-普通查询" class="headerlink" title="2.普通查询"></a>2.普通查询</h4><p>==注意：<em>名值对中名必须为数据库字段名即为数据库中列名</em>==</p>
-<h6 id="①-通过对Map中put名值对进行添加，使用selectByMap（）进行查询"><a href="#①-通过对Map中put名值对进行添加，使用selectByMap（）进行查询" class="headerlink" title="①.通过对Map中put名值对进行添加，使用selectByMap（）进行查询"></a>①.通过对Map中put名值对进行添加，使用selectByMap（）进行查询</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void selectByMap()&#123;</span><br><span class="line">    HashMap&lt;String, Object&gt; columnMap &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">    columnMap.put(&quot;emp_name&quot;,&quot;奥特曼&quot;);</span><br><span class="line">    columnMap.put(&quot;gender&quot;,&quot;W&quot;);</span><br><span class="line">    List&lt;Tbl_emp&gt; list &#x3D; tbl_empMapper.selectByMap(columnMap);</span><br><span class="line">    list.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
       <a class="article-more-link" href="/2019/12/25/newpapername/">阅读更多...</a>
       
@@ -329,13 +319,13 @@
   <div class="reward-box">
     
     <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
+      <img class="reward-img" src="/images/alipay_zhangyux.jpg">
       <span class="reward-type">支付宝</span>
     </div>
     
     
     <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.jpg">
+      <img class="reward-img" src="/images/alipy_wechat.jpg">
       <span class="reward-type">微信</span>
     </div>
     
