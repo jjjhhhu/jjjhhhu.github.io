@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>vue学习报错</title>
-    <url>/2019/12/26/newpage/</url>
+    <url>/2019/12/26/vue/</url>
     <content><![CDATA[<h1 id="vue学习报错"><a href="#vue学习报错" class="headerlink" title="vue学习报错"></a>vue学习报错</h1><h4 id="1-v-for报错"><a href="#1-v-for报错" class="headerlink" title="1.v-for报错"></a>1.v-for报错</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">error: Custom elements in iteration require &#39;v-bind:key&#39; directives (vue&#x2F;valid-v-for) at src\views\home\Home.vue:5:7:</span><br><span class="line">描述：必须使用 :key&#x3D;&#39;item&#39;,Vue 2.2.0+的版本里，当在组件中使用v-for时，key是必须的。</span><br><span class="line">解决：在v-for后面绑定key</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -12,7 +12,7 @@
   </entry>
   <entry>
     <title>mybatiesplus学习总结（一）</title>
-    <url>/2019/12/25/newpapername/</url>
+    <url>/2019/12/25/mybatiesplus/</url>
     <content><![CDATA[<h1 id="mybatiesPlus-学习笔记"><a href="#mybatiesPlus-学习笔记" class="headerlink" title="mybatiesPlus 学习笔记"></a>mybatiesPlus 学习笔记</h1><h2 id="一、lombok"><a href="#一、lombok" class="headerlink" title="一、lombok"></a>一、lombok</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;lombok介绍</span><br><span class="line">Lombok项目是一个Java库，它会自动插入编辑器和构建工具中，Lombok提供了一组有用的注释，用来消除Java类中的大量样板代码。仅五个字符(@Data)就可以替换数百行代码从而产生干净，简洁且易于维护的Java类。</span><br></pre></td></tr></table></figure>
 
 <h4 id="1-使用lombok的操作"><a href="#1-使用lombok的操作" class="headerlink" title="1.使用lombok的操作"></a>1.使用lombok的操作</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Data</span><br><span class="line">1.创建实体 bean 时，只需要在 bean 上加入 @Data </span><br><span class="line">注解，在编译时会自动假如getter和setter方法</span><br></pre></td></tr></table></figure>
