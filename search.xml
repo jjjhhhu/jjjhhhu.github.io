@@ -1,6 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SqlServer_4</title>
+    <url>/2020/04/15/SqlServer-4/</url>
+    <content><![CDATA[<h2 id="（一）数据库的完整性实验"><a href="#（一）数据库的完整性实验" class="headerlink" title="（一）数据库的完整性实验"></a>（一）数据库的完整性实验</h2><blockquote>
+<p>在student,sc,course表实验，要求三个表的结构为第三章课本上的结构，数据为课本上的数据。</p>
+</blockquote>
+<h5 id="1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。"><a href="#1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。" class="headerlink" title="1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。"></a>1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table student </span><br><span class="line">add constraint c1 check(Sage &gt;&#x3D; 1 and Sage &lt;&#x3D;100)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。"><a href="#2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。" class="headerlink" title="2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。"></a>2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update student set Sage&#x3D;102 where Sname&#x3D;&#39;刘晨&#39;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>出现：<br>–UPDATE 语句与 CHECK 约束”c1”冲突。该冲突发生于数据库”wrz”，表”dbo.student”, column ‘Sage’。语句已终止。</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="3、在student表中插入学号为‘201215121‘，姓名为王二，年龄为20的记录，观察结果并能分析。"><a href="#3、在student表中插入学号为‘201215121‘，姓名为王二，年龄为20的记录，观察结果并能分析。" class="headerlink" title="3、在student表中插入学号为‘201215121‘，姓名为王二，年龄为20的记录，观察结果并能分析。"></a>3、在student表中插入学号为‘201215121‘，姓名为王二，年龄为20的记录，观察结果并能分析。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into student values(201215121,&#39;王二&#39;,null,20,null);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>违反了 PRIMARY KEY 约束 ‘PK__student__CA1FE4647F60ED59’。不能在对象 ‘dbo.student’ 中插入重复键。语句已终止。</p>
+</blockquote>
+<h5 id="4、在SC表中将201215121该为900，观察结果并能分析。"><a href="#4、在SC表中将201215121该为900，观察结果并能分析。" class="headerlink" title="4、在SC表中将201215121该为900，观察结果并能分析。"></a>4、在SC表中将201215121该为900，观察结果并能分析。</h5><blockquote>
+<p>如果这题能直接修改，那么应该是建表时外键没加<br> 下面前两个为加外键的代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table SC</span><br><span class="line">add foreign key(Cno) references Course(Cno);</span><br><span class="line"></span><br><span class="line">alter table SC</span><br><span class="line">add foreign key(Sno) references Course(Sno);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update SC set Sno &#x3D; 900 where Sno &#x3D; 201215121;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>UPDATE 语句与 FOREIGN KEY 约束”FK__SC__Sno__21B6055D”冲突。该冲突发生于数据库”wrz”，表”dbo.student”, column ‘Sno’。</p>
+</blockquote>
+<h5 id="5、在student表中将201215121该为910，观察结果并能分析。"><a href="#5、在student表中将201215121该为910，观察结果并能分析。" class="headerlink" title="5、在student表中将201215121该为910，观察结果并能分析。"></a>5、在student表中将201215121该为910，观察结果并能分析。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update student set Sno&#x3D;910 where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>UPDATE 语句与 REFERENCE 约束”FK__SC__Sno__21B6055D”冲突。该冲突发生于数据库”wrz”，表”dbo.SC”, column ‘Sno’。</p>
+</blockquote>
+<h5 id="6、将sc表的sno的外码约束修改操作违约后的反应改级联。"><a href="#6、将sc表的sno的外码约束修改操作违约后的反应改级联。" class="headerlink" title="6、将sc表的sno的外码约束修改操作违约后的反应改级联。"></a>6、将sc表的sno的外码约束修改操作违约后的反应改级联。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table sc</span><br><span class="line">drop constraint FK__SC__Sno__21B6055D</span><br><span class="line"></span><br><span class="line">alter table sc </span><br><span class="line">add constraint FK__SC__Sno__21B6055D</span><br><span class="line">foreign key(Sno) references student(Sno)</span><br><span class="line">on update cascade;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7、再执行5题中“-在student表中将201215121该为910”，观察结果并分别查看STUDENT及SC中的数据。"><a href="#7、再执行5题中“-在student表中将201215121该为910”，观察结果并分别查看STUDENT及SC中的数据。" class="headerlink" title="7、再执行5题中“ 在student表中将201215121该为910”，观察结果并分别查看STUDENT及SC中的数据。"></a>7、再执行5题中“ 在student表中将201215121该为910”，观察结果并分别查看STUDENT及SC中的数据。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update student set Sno &#x3D; 910 where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>现在改就成功了</p>
+</blockquote>
+<h5 id="8、将course表中的课程号为1的记录删除，违约后按级联处理。观察结果并能分析。该题无法实现这种级联的设置，请问为什么？"><a href="#8、将course表中的课程号为1的记录删除，违约后按级联处理。观察结果并能分析。该题无法实现这种级联的设置，请问为什么？" class="headerlink" title="8、将course表中的课程号为1的记录删除，违约后按级联处理。观察结果并能分析。该题无法实现这种级联的设置，请问为什么？"></a>8、将course表中的课程号为1的记录删除，违约后按级联处理。观察结果并能分析。该题无法实现这种级联的设置，请问为什么？</h5><p>– 这段是为course表加个外键，之前建表时如果忘记加了需要先加上</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table Course</span><br><span class="line">add foreign key(Cpno) references Course(Cno);</span><br></pre></td></tr></table></figure>
+<p> – 然后执行删除代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">delete from Course where Cno &#x3D; 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>报错：DELETE 语句与 REFERENCE 约束”FK__SC__Cno__22AA2996”冲突。该冲突发生于数据库”wrz”，表”dbo.SC”, column ‘Cno’。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>修改约束</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alter table course</span><br><span class="line">drop constraint FK__Course__Cpno__239E4DCF</span><br><span class="line"></span><br><span class="line">alter table course </span><br><span class="line">add foreign key(Cpno) references Course(Cno)</span><br><span class="line">on update cascade</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将 FOREIGN KEY 约束 ‘FK__Course__Cpno__286302EC’ 引入表 ‘Course’ 可能会导致循环或多重级联路径。请指定 ON DELETE NO ACTION 或 ON UPDATE NO ACTION，或修改其他 FOREIGN KEY 约束。<br>– 消息 1750，级别 16，状态 0，第 1 行 无法创建约束。请参阅前面的错误消息。</p>
+</blockquote>
+<h4 id="（二）数据库安全性"><a href="#（二）数据库安全性" class="headerlink" title="（二）数据库安全性"></a>（二）数据库安全性</h4><h5 id="1、创建登陆名STL，密码自定，默认数据库为你前期建立的数据库。"><a href="#1、创建登陆名STL，密码自定，默认数据库为你前期建立的数据库。" class="headerlink" title="1、创建登陆名STL，密码自定，默认数据库为你前期建立的数据库。"></a>1、创建登陆名STL，密码自定，默认数据库为你前期建立的数据库。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use wrz </span><br><span class="line">go </span><br><span class="line">create login STL with password &#x3D; &#39;123&#39;,DEFAULT_DATABASE &#x3D; wrz</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、创建用户user1，登陆名为-NT-AUTHORITY-SYSTEM-。"><a href="#2、创建用户user1，登陆名为-NT-AUTHORITY-SYSTEM-。" class="headerlink" title="2、创建用户user1，登陆名为[NT AUTHORITY\SYSTEM]。"></a>2、创建用户user1，登陆名为[NT AUTHORITY\SYSTEM]。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create user user1 for login [NT AUTHORITY\SYSTEM];</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、创建用户user2，登陆名为-STL-。"><a href="#3、创建用户user2，登陆名为-STL-。" class="headerlink" title="3、创建用户user2，登陆名为[STL]。"></a>3、创建用户user2，登陆名为[STL]。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create user user2 for login [STL];</span><br></pre></td></tr></table></figure>
+<h5 id="4、将创建表的权限授予用户user1和user2。"><a href="#4、将创建表的权限授予用户user1和user2。" class="headerlink" title="4、将创建表的权限授予用户user1和user2。"></a>4、将创建表的权限授予用户user1和user2。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grant create table </span><br><span class="line">to user1,user2</span><br></pre></td></tr></table></figure>
+
+<h5 id="5、授予用户user1对表student的insert和delete的权限。"><a href="#5、授予用户user1对表student的insert和delete的权限。" class="headerlink" title="5、授予用户user1对表student的insert和delete的权限。"></a>5、授予用户user1对表student的insert和delete的权限。</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grant insert,delete</span><br><span class="line">on student</span><br><span class="line">to user1;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>基础学习、实验报告</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SqlServer_3</title>
+    <url>/2020/04/15/SqlServer-3/</url>
+    <content><![CDATA[<blockquote>
+<p>该系列文章为目前数据库课程的实验课，写做纪念</p>
+</blockquote>
+<p>– （一）完成下面的数据插入操作<br>– 1、在student表中插入一条姓名为“张晴”、学号为“008”、<br>– 性别为“女”的信息。            </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into student(Sname,Sno,Ssex) </span><br><span class="line">values(&#39;张晴&#39;,008,&#39;女&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>– 2、创建一个新的表，表名为ST1，表的结构和STUDENT<br>– 表的结构一样，然后将STUDENT表中信息系的学生的信息<br>– 插入到表ST1中去。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table ST1(</span><br><span class="line">Sno int primary key,</span><br><span class="line">Sname varchar(20),</span><br><span class="line">Ssex varchar(1),</span><br><span class="line">Sage int,</span><br><span class="line">Sdept varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>//这里有错，应该不是这样写的，不过我不会</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * into ST1 from student where Sdept&#x3D;&#39;CS&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>– 3、在表STUDENT中插入学号为“201215129”一条记录。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into student(Sno)</span><br><span class="line">values(201215129)</span><br></pre></td></tr></table></figure>
+
+<p>– 4、在SC表中插入学号为“201215129”，课程号为“5”的，<br>– 成绩为67的信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into SC</span><br><span class="line">values(201215129,5,67)</span><br></pre></td></tr></table></figure>
+
+<p>–  5、在sc表插入姓张学生的选课记录，他们选修的<br>– 课程号为“6”，成绩为90。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql中这样写就过了：</span><br><span class="line">insert into SC</span><br><span class="line">values((select Sno from student where Sname like &#39;张%&#39;),6,90)</span><br><span class="line"></span><br><span class="line">这样写应该不对，这题我搞晕了</span><br><span class="line">insert into SC</span><br><span class="line">select s.Sno,6,90</span><br><span class="line">from student s</span><br><span class="line">where s.Sname like &#39;张%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>– （二）完成下面的数据修改操作<br>– 1、将STUDENT表的数学系的学生的年龄都增加2岁。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update student</span><br><span class="line">set Sage &#x3D; Sage+2</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在sc表中将学号为“201215121”学生选修课程成绩改为95。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update SC</span><br><span class="line">set Grade &#x3D; 95</span><br><span class="line">where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>
+
+<p>– 3、将选修了课程号位2的学生的年龄改为15岁。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update student</span><br><span class="line">set Sage &#x3D; 15</span><br><span class="line">where Sno in (</span><br><span class="line">select sc1.Sno</span><br><span class="line">from SC sc1</span><br><span class="line">where Sno &#x3D; sc1.Sno</span><br><span class="line">and sc1.Cno &#x3D; 2</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>– (三)完成下面的数据删除操作。<br>– 1、在sc表中删除成绩小于70的记录。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">delete from SC </span><br><span class="line">where Grade &lt; 70</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在sc删除选修了数据处理课程的选课记录。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">delete from SC</span><br><span class="line">where Cno &#x3D; (</span><br><span class="line">select Cno </span><br><span class="line">from Course co1</span><br><span class="line">where co1.Cname &#x3D; &#39;数据处理&#39;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>–（四）视图<br>– 1、建立计算机系学生的视图st2，含有学号、姓名、系别三列，<br>– 并要求在进行更新操作时保证更新的是计算机系的学生信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create view st2</span><br><span class="line">as </span><br><span class="line">select Sno,Sname,Sdept from student where Sdept&#x3D;&#39;CS&#39;</span><br><span class="line">with check option;</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在视图ST2上插入SNO为“09”，SNAME为“张三”的一条信息记录，<br>– 插入完成后，查看STUDENT表数据。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert into ST2</span><br><span class="line">values(09,&#39;张三&#39;,&#39;cs&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>– 3、在视图ST2上删除2中插入的那条记录。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">delete from ST2</span><br><span class="line">where Sno &#x3D; 09</span><br></pre></td></tr></table></figure>
+
+<p>– 4、通过视图ST2、表sc查询学生的学号、姓名、课程号、成绩。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select st2.Sno,st2.Sname,Cno,Grade from ST2,SC </span><br><span class="line">where st2.Sno &#x3D; sc.Sno</span><br></pre></td></tr></table></figure>
+
+<p>– 5、通过视图st2建立年龄小于18学生视图st3。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create view st3</span><br><span class="line">as</span><br><span class="line">select s2.Sno,s2.Sname,s2.Sdept </span><br><span class="line">from st2 s2,student </span><br><span class="line">where student.Sage &lt; 18</span><br></pre></td></tr></table></figure>
+
+<p>– 6、通过视图st2将学号为201215121的姓名改为王明。<br>– 修改完成后查看STUDENT表数据。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">update ST2</span><br><span class="line">set Sname &#x3D; &#39;王明&#39;</span><br><span class="line">where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>基础学习、实验报告</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>是 String ， StringBuffer 还是 StringBuilder ？</title>
     <url>/2020/03/16/StringBuilder/</url>
     <content><![CDATA[<h1 id="是-String-，-StringBuffer-还是-StringBuilder-？"><a href="#是-String-，-StringBuffer-还是-StringBuilder-？" class="headerlink" title="是 String ， StringBuffer 还是 StringBuilder ？"></a>是 String ， StringBuffer 还是 StringBuilder ？</h1><p>如有侵权，立刻删除，原文链接：<a href="http://www.blogjava.net/chenpengyi/archive/2006/05/04/44492.html" target="_blank" rel="noopener">http://www.blogjava.net/chenpengyi/archive/2006/05/04/44492.html</a><br>相信大家对 String 和 StringBuffer 的区别也已经很了解了，但是估计还是会有很多同志对这两个类的工作原理有些不清楚的地方，今天我在这里重新把这个概念给大家复习一下，顺便牵出 J2SE 5.0 里面带来的一个新的字符操作的类—— StringBuilder （先别忙着扔我砖头，我还算清醒，我这里说的不是 C ＃， Java 也有 StringBuilder 类）。那么这个 StringBuilder 和 StringBuffer 以及我们最早遇见的 String 类有那些区别呢？在不同的场合下我们应该用哪个呢？我讲讲自己对这几个类的一点看法，也希望大家提出意见，每个人都有错的地方，在错了改的同时更是一个学习的好机会。<br>相信大家对 String 和 StringBuffer 的区别也已经很了解了，但是估计还是会有很多同志对这两个类的工作原理有些不清楚的地方，今天我在这里重新把这个概念给大家复习一下，顺便牵出 J2SE 5.0 里面带来的一个新的字符操作的类—— StringBuilder （先别忙着扔我砖头，我还算清醒，我这里说的不是 C ＃， Java 也有 StringBuilder 类）。那么这个 StringBuilder 和 StringBuffer 以及我们最早遇见的 String 类有那些区别呢？在不同的场合下我们应该用哪个呢？我讲讲自己对这几个类的一点看法，也希望大家提出意见，每个人都有错的地方，在错了改的同时更是一个学习的好机会。</p>

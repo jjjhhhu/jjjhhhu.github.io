@@ -64,6 +64,147 @@
 
     
     
+    <article id="post-SqlServer-4" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/15/SqlServer-4/"
+    >SqlServer_4</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/15/SqlServer-4/" class="article-date">
+  <time datetime="2020-04-15T13:35:09.000Z" itemprop="datePublished">2020-04-15</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="（一）数据库的完整性实验"><a href="#（一）数据库的完整性实验" class="headerlink" title="（一）数据库的完整性实验"></a>（一）数据库的完整性实验</h2><blockquote>
+<p>在student,sc,course表实验，要求三个表的结构为第三章课本上的结构，数据为课本上的数据。</p>
+</blockquote>
+<h5 id="1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。"><a href="#1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。" class="headerlink" title="1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。"></a>1、为表student增加约束C1，要求sage取值范围为1——100的约束条件。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table student </span><br><span class="line">add constraint c1 check(Sage &gt;&#x3D; 1 and Sage &lt;&#x3D;100)</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。"><a href="#2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。" class="headerlink" title="2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。"></a>2、完成1后，在student表中，将姓名为刘晨的学生的年龄改为102岁，观察违反完整性约束后的结果。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update student set Sage&#x3D;102 where Sname&#x3D;&#39;刘晨&#39;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>出现：<br>–UPDATE 语句与 CHECK 约束”c1”冲突。该冲突发生于数据库”wrz”，表”dbo.student”, column ‘Sage’。语句已终止。</p>
+</blockquote>
+      
+      <a class="article-more-link" href="/2020/04/15/SqlServer-4/">阅读更多...</a>
+      
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/15/SqlServer-4/" data-id="ck91dqnb40009m8uv1wt63g9g"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E3%80%81%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" rel="tag">基础学习、实验报告</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-SqlServer-3" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/15/SqlServer-3/"
+    >SqlServer_3</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/15/SqlServer-3/" class="article-date">
+  <time datetime="2020-04-15T13:33:39.000Z" itemprop="datePublished">2020-04-15</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>该系列文章为目前数据库课程的实验课，写做纪念</p>
+</blockquote>
+<p>– （一）完成下面的数据插入操作<br>– 1、在student表中插入一条姓名为“张晴”、学号为“008”、<br>– 性别为“女”的信息。            </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into student(Sname,Sno,Ssex) </span><br><span class="line">values(&#39;张晴&#39;,008,&#39;女&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>– 2、创建一个新的表，表名为ST1，表的结构和STUDENT<br>– 表的结构一样，然后将STUDENT表中信息系的学生的信息<br>– 插入到表ST1中去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table ST1(</span><br><span class="line">Sno int primary key,</span><br><span class="line">Sname varchar(20),</span><br><span class="line">Ssex varchar(1),</span><br><span class="line">Sage int,</span><br><span class="line">Sdept varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+      
+      <a class="article-more-link" href="/2020/04/15/SqlServer-3/">阅读更多...</a>
+      
+      
+      <!-- 打赏 -->
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/15/SqlServer-3/" data-id="ck91dqnaw0003m8uvfd3rgsqd"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E3%80%81%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" rel="tag">基础学习、实验报告</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-StringBuilder" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -108,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/16/StringBuilder/" data-id="ck7yb6qhe00050wuvh4t46rkt"
+      <a data-url="http://yoursite.com/2020/03/16/StringBuilder/" data-id="ck91dqnax0004m8uv26xs02l2"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%85%E8%AF%BB%E5%8D%9A%E5%AE%A2/" rel="tag">阅读博客</a></li></ul>
@@ -172,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/30/Java-IO/" data-id="ck7yb6qh800010wuv74wr10ir"
+      <a data-url="http://yoursite.com/2020/01/30/Java-IO/" data-id="ck91dqnas0001m8uv7ajd9vio"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E9%98%B6%E6%AE%B5%E5%AE%8C%E6%AF%95/" rel="tag">一阶段完毕</a></li></ul>
@@ -234,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/26/vue/" data-id="ck7yb6qhg00080wuv2ebr0ssm"
+      <a data-url="http://yoursite.com/2019/12/26/vue/" data-id="ck91dqnb7000bm8uvf9xf7hyh"
         class="article-share-link">分享</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8D%89%E7%A8%BF/" rel="tag">草稿</a></li></ul>
@@ -302,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/25/mybatiesplus/" data-id="ck7yb6qhd00040wuvd9tj23cj"
+      <a data-url="http://yoursite.com/2019/12/25/mybatiesplus/" data-id="ck91dqnb10008m8uvcbt6hl4p"
         class="article-share-link">分享</a>
       
     </footer>
@@ -373,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/25/hello-world/" data-id="ck7yb6qhb00030wuvdwmx8h0c"
+      <a data-url="http://yoursite.com/2019/12/25/hello-world/" data-id="ck91dqnaz0005m8uvah9ldc73"
         class="article-share-link">分享</a>
       
     </footer>

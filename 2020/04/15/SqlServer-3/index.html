@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    SqlServer_3 |  WxxyWrz_Blog
+  </title>
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="WxxyWrz_Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-SqlServer-3" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  SqlServer_3
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/15/SqlServer-3/" class="article-date">
+  <time datetime="2020-04-15T13:33:39.000Z" itemprop="datePublished">2020-04-15</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>该系列文章为目前数据库课程的实验课，写做纪念</p>
+</blockquote>
+<p>– （一）完成下面的数据插入操作<br>– 1、在student表中插入一条姓名为“张晴”、学号为“008”、<br>– 性别为“女”的信息。            </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into student(Sname,Sno,Ssex) </span><br><span class="line">values(&#39;张晴&#39;,008,&#39;女&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>– 2、创建一个新的表，表名为ST1，表的结构和STUDENT<br>– 表的结构一样，然后将STUDENT表中信息系的学生的信息<br>– 插入到表ST1中去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table ST1(</span><br><span class="line">Sno int primary key,</span><br><span class="line">Sname varchar(20),</span><br><span class="line">Ssex varchar(1),</span><br><span class="line">Sage int,</span><br><span class="line">Sdept varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>//这里有错，应该不是这样写的，不过我不会</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * into ST1 from student where Sdept&#x3D;&#39;CS&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>– 3、在表STUDENT中插入学号为“201215129”一条记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into student(Sno)</span><br><span class="line">values(201215129)</span><br></pre></td></tr></table></figure>
+
+<p>– 4、在SC表中插入学号为“201215129”，课程号为“5”的，<br>– 成绩为67的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into SC</span><br><span class="line">values(201215129,5,67)</span><br></pre></td></tr></table></figure>
+
+<p>–  5、在sc表插入姓张学生的选课记录，他们选修的<br>– 课程号为“6”，成绩为90。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql中这样写就过了：</span><br><span class="line">insert into SC</span><br><span class="line">values((select Sno from student where Sname like &#39;张%&#39;),6,90)</span><br><span class="line"></span><br><span class="line">这样写应该不对，这题我搞晕了</span><br><span class="line">insert into SC</span><br><span class="line">select s.Sno,6,90</span><br><span class="line">from student s</span><br><span class="line">where s.Sname like &#39;张%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>– （二）完成下面的数据修改操作<br>– 1、将STUDENT表的数学系的学生的年龄都增加2岁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update student</span><br><span class="line">set Sage &#x3D; Sage+2</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在sc表中将学号为“201215121”学生选修课程成绩改为95。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update SC</span><br><span class="line">set Grade &#x3D; 95</span><br><span class="line">where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>
+
+<p>– 3、将选修了课程号位2的学生的年龄改为15岁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">update student</span><br><span class="line">set Sage &#x3D; 15</span><br><span class="line">where Sno in (</span><br><span class="line">select sc1.Sno</span><br><span class="line">from SC sc1</span><br><span class="line">where Sno &#x3D; sc1.Sno</span><br><span class="line">and sc1.Cno &#x3D; 2</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>– (三)完成下面的数据删除操作。<br>– 1、在sc表中删除成绩小于70的记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from SC </span><br><span class="line">where Grade &lt; 70</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在sc删除选修了数据处理课程的选课记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delete from SC</span><br><span class="line">where Cno &#x3D; (</span><br><span class="line">select Cno </span><br><span class="line">from Course co1</span><br><span class="line">where co1.Cname &#x3D; &#39;数据处理&#39;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>–（四）视图<br>– 1、建立计算机系学生的视图st2，含有学号、姓名、系别三列，<br>– 并要求在进行更新操作时保证更新的是计算机系的学生信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create view st2</span><br><span class="line">as </span><br><span class="line">select Sno,Sname,Sdept from student where Sdept&#x3D;&#39;CS&#39;</span><br><span class="line">with check option;</span><br></pre></td></tr></table></figure>
+
+<p>– 2、在视图ST2上插入SNO为“09”，SNAME为“张三”的一条信息记录，<br>– 插入完成后，查看STUDENT表数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into ST2</span><br><span class="line">values(09,&#39;张三&#39;,&#39;cs&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>– 3、在视图ST2上删除2中插入的那条记录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from ST2</span><br><span class="line">where Sno &#x3D; 09</span><br></pre></td></tr></table></figure>
+
+<p>– 4、通过视图ST2、表sc查询学生的学号、姓名、课程号、成绩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select st2.Sno,st2.Sname,Cno,Grade from ST2,SC </span><br><span class="line">where st2.Sno &#x3D; sc.Sno</span><br></pre></td></tr></table></figure>
+
+<p>– 5、通过视图st2建立年龄小于18学生视图st3。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create view st3</span><br><span class="line">as</span><br><span class="line">select s2.Sno,s2.Sname,s2.Sdept </span><br><span class="line">from st2 s2,student </span><br><span class="line">where student.Sage &lt; 18</span><br></pre></td></tr></table></figure>
+
+<p>– 6、通过视图st2将学号为201215121的姓名改为王明。<br>– 修改完成后查看STUDENT表数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update ST2</span><br><span class="line">set Sname &#x3D; &#39;王明&#39;</span><br><span class="line">where Sno &#x3D; 201215121</span><br></pre></td></tr></table></figure>
+      
+      <!-- 打赏 -->
+      
+        <div id="reward-btn">
+          打赏
+        </div>
+        
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/15/SqlServer-3/" data-id="ck91dqnaw0003m8uvfd3rgsqd"
+        class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E3%80%81%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" rel="tag">基础学习、实验报告</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/04/15/SqlServer-4/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            SqlServer_4
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/16/StringBuilder/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">是 String ， StringBuffer 还是 StringBuilder ？</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: false,
+        app_id: 'w349rJqy3bT9WioelAqvt8M1-gzGzoHsz',
+        app_key: 'jC6Al3te1mxfby71yaiObbMD',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Wrz
+      </li>
+      <li>
+        
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a> by shenyu
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    
+    <aside class="sidebar">
+      
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="WxxyWrz_Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">目录</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E8%8D%89%E7%A8%BF/">草稿</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/vuetext/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="http://wxxywrz.ltd:8081/" target="_blank" rel="noopener">网站制作</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipy_zhangyux.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipy_wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  
+  
+  </div>
+</body>
+
+</html>
