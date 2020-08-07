@@ -1,6 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2020暑期学习计划</title>
+    <url>/2020/08/07/LearningPlan/</url>
+    <content><![CDATA[<h1 id="2020年暑期学习计划"><a href="#2020年暑期学习计划" class="headerlink" title="2020年暑期学习计划"></a>2020年暑期学习计划</h1><blockquote>
+<p>一阶段：2020-8-7 ~ 2020-x-x</p>
+</blockquote>
+<html>
+<!--在这里插入内容-->
+<div><p style="color: black;font-size:40px;">要早早起床</p></div>
+
+</html>
+
+<hr>
+<h4 id="上午"><a href="#上午" class="headerlink" title="上午"></a>上午</h4><h6 id="起床及早饭-7-30-8-00"><a href="#起床及早饭-7-30-8-00" class="headerlink" title="起床及早饭 : 7:30 - 8:00"></a>起床及早饭 : 7:30 - 8:00</h6><a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th>时间\事件</th>
+<th>学车</th>
+<th>在家学习</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8:00-10:30</td>
+<td>科目三</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>10:30-12:00</td>
+<td>科目三</td>
+<td>学校专业课</td>
+</tr>
+<tr>
+<td>&gt; 上午学习安排</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>—</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>#### 下午</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>###### 吃饭及午休 : 12:00 - 2:00</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>时间\事件</th>
+<th>学车</th>
+<th>在家学习</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>14:00-17:00</td>
+<td>科目三</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>17:00-19:00</td>
+<td>科目三</td>
+<td>学校专业课</td>
+</tr>
+<tr>
+<td>&gt; 下午学习安排</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>—</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>#### 晚上</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>###### 晚饭时间、洗澡及带娃 : 19:00 - 21:00</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>时间\事件</th>
+<th>其它</th>
+<th>在家学习</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>21:00-22:00</td>
+<td>无</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>22:00-23:00</td>
+<td>游戏</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>23:00-24:00</td>
+<td>无</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>24:00-01:00</td>
+<td>睡觉</td>
+<td>大数据</td>
+</tr>
+<tr>
+<td>&gt; 晚上学习安排</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h6 id="睡觉时间：1-00"><a href="#睡觉时间：1-00" class="headerlink" title="睡觉时间：1:00"></a>睡觉时间：1:00</h6><html>
+<!--在这里插入内容-->
+<div><p style="color: black;font-size:40px;">要早早睡觉觉</p></div>
+</html>
+
+
+
+]]></content>
+      <tags>
+        <tag>学习计划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SqlServer-5</title>
     <url>/2020/05/13/SqlServer-5/</url>
     <content><![CDATA[<h2 id="（五）数据库综合性实验"><a href="#（五）数据库综合性实验" class="headerlink" title="（五）数据库综合性实验"></a>（五）数据库综合性实验</h2><p><code>create database StudentDormitory;</code></p>
